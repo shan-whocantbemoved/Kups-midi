@@ -1,0 +1,26 @@
+{
+  "id": "open-air",
+  "name": "Open Air",
+  "sizeBytes": 1000,
+  "patches": [
+    {
+      "name": "Blue Horizon",
+      "key": "A",
+      "bpm": 104,
+      "layers": [
+        { "name": "Wide piano", "type": "keys", "level": 78 },
+        { "name": "Slow glass pad", "type": "pad", "level": 46 },
+        { "name": "Air shimmer", "type": "strings", "level": 24 }
+      ]
+    },
+    {
+      "name": "Glass Field",
+      "key": "D",
+      "bpm": 118,
+      "layers": [
+        { "name": "Soft mallet", "type": "instrument", "level": 70 },
+        { "name": "Open fifth pad", "type": "pad", "level": 36 }
+      ]
+    }
+  ]
+}

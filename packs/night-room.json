@@ -1,0 +1,25 @@
+{
+  "id": "night-room",
+  "name": "Night Room",
+  "sizeBytes": 1100,
+  "patches": [
+    {
+      "name": "Afterglow Piano",
+      "key": "C",
+      "bpm": 78,
+      "layers": [
+        { "name": "Felt piano", "type": "keys", "level": 82 },
+        { "name": "Tape haze", "type": "pad", "level": 31 }
+      ]
+    },
+    {
+      "name": "Soft Focus",
+      "key": "F",
+      "bpm": 92,
+      "layers": [
+        { "name": "Electric piano", "type": "keys", "level": 76 },
+        { "name": "Warm strings", "type": "strings", "level": 38 }
+      ]
+    }
+  ]
+}

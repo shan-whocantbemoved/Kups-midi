@@ -1,0 +1,18 @@
+{
+  "packs": [
+    {
+      "id": "night-room",
+      "name": "Night Room",
+      "description": "Piano-led late set textures",
+      "sizeLabel": "1.1 KB",
+      "preview": ["Afterglow Piano", "Soft Focus"]
+    },
+    {
+      "id": "open-air",
+      "name": "Open Air",
+      "description": "Wide pads and slow-build layers",
+      "sizeLabel": "1.0 KB",
+      "preview": ["Blue Horizon", "Glass Field"]
+    }
+  ]
+}

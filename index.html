@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#8bdcff">
+  <meta name="description" content="A focused setlist and sound-layer controller for live MIDI performance.">
+  <title>Blue Note | MIDI Setlist</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="splash" class="splash" aria-label="Loading Blue Note">
+    <img src="icon.svg" alt="Blue Note keyboard mark" class="splash-logo">
+    <div class="splash-name">BLUE NOTE <span>PERFORMANCE</span></div>
+    <div class="loading-track"><i></i></div>
+  </div>
+  <div id="app" class="app-shell is-hidden">
+    <header class="topbar">
+      <button id="brand-home" class="brand" aria-label="Return to dashboard"><img src="icon.svg" alt=""><span>BLUE NOTE</span></button>
+      <div class="top-context" id="top-context">MIDI SETLIST PERFORMANCE</div>
+      <div class="top-actions">
+        <div class="device-anchor">
+          <button id="device-button" class="icon-button device-button" aria-label="MIDI devices" aria-expanded="false" title="MIDI devices">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M10 10h.01M13 10h.01M16 10h.01M8 14h8"/></svg><b id="device-count">0</b>
+          </button>
+          <div id="device-popover" class="popover device-popover" hidden></div>
+        </div>
+        <button id="settings-button" class="icon-button" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.5 2.6-1.7-.7a8 8 0 0 1-1.5.9l-.3 1.8h-3l-.3-1.8a8 8 0 0 1-1.5-.9l-1.7.7-1.5-2.6 1.4-1.1a7 7 0 0 1 0-1.8l-1.4-1.1 1.5-2.6 1.7.7a8 8 0 0 1 1.5-.9l.3-1.8h3l.3 1.8a8 8 0 0 1 1.5.9l1.7-.7 1.5 2.6-1.4 1.1a7 7 0 0 1 0 1.8Z" transform="translate(-2 -1)"/></svg></button>
+      </div>
+    </header>
+
+    <main id="dashboard" class="dashboard view">
+      <section class="welcome-row">
+        <div><p class="eyebrow">YOUR STAGE, READY</p><h1>Set the room.<br><span>Find the moment.</span></h1><p class="intro">A quiet command center for the sounds you take on stage.</p></div>
+        <div class="welcome-mark"><img src="icon.svg" alt="Blue Note keyboard logo"></div>
+      </section>
+      <section class="launch-actions" aria-label="Setlist actions">
+        <button id="new-setlist" class="launch-tile launch-primary"><span class="tile-icon">+</span><span><strong>New setlist</strong><small>Build a set from the first note</small></span><span class="tile-arrow">↗</span></button>
+        <button id="open-setlist" class="launch-tile"><span class="tile-icon"><svg viewBox="0 0 24 24"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6H10l2 2h7.5A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5Z"/></svg></span><span><strong>Open a setlist</strong><small>Find a saved performance</small></span><span class="tile-arrow">↗</span></button>
+        <button id="ambient-launch" class="launch-tile"><span class="tile-icon"><svg viewBox="0 0 24 24"><path d="M3 12c3-8 5 8 9 0s6 8 9 0"/><path d="M3 18c3-5 5 5 9 0s6 5 9 0"/></svg></span><span><strong>Ambient player</strong><small>Open a sustained tone bed</small></span><span class="tile-arrow">↗</span></button>
+        <button id="content-packs" class="launch-tile"><span class="tile-icon"><svg viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4.4 7.5 7.6 4.4 7.6-4.4M12 12v9"/></svg></span><span><strong>Content packs</strong><small>Browse stage-ready presets</small></span><span class="tile-arrow">↗</span></button>
+      </section>
+      <section class="recent-section"><div class="section-heading"><div><p class="eyebrow">PICK UP WHERE YOU LEFT OFF</p><h2>Recent setlists</h2></div><button id="see-all" class="text-button">All setlists <span>→</span></button></div><div id="recent-list" class="recent-list"></div></section>
+      <footer class="about"><span class="about-mark">BLUE NOTE</span><span>Built for the space between songs.</span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API" target="_blank" rel="noreferrer">MIDI support</a><span>v1.0.0</span></footer>
+    </main>
+
+    <main id="performance" class="performance view is-hidden">
+      <aside id="sidebar" class="sidebar">
+        <div class="sidebar-head"><button id="menu-button" class="icon-button" aria-label="Performance menu" title="Performance menu"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><span>STAGE CONTROL</span><button id="sidebar-close" class="icon-button mobile-only" aria-label="Close sidebar">×</button></div>
+        <section class="module midi-module"><div class="module-heading"><span>MIDI DEVICES</span><button id="refresh-midi" class="mini-icon" aria-label="Refresh MIDI devices" title="Refresh MIDI devices">↻</button></div><div id="sidebar-devices" class="device-list"></div></section>
+        <section class="module learn-module"><div class="module-heading"><span>MIDI LEARN</span><span class="module-tools"><button id="delete-map" class="mini-icon" aria-label="Delete selected mapping" title="Delete mapping">⌫</button><button id="save-maps" class="mini-icon" aria-label="Save mappings and layers" title="Save mappings">✓</button></span></div><button id="learn-toggle" class="learn-toggle"><span class="learn-dot"></span><span>Learn a control</span><kbd>OFF</kbd></button><div id="learn-status" class="learn-status">Choose a control, then turn Learn on.</div><div id="mapping-list" class="mapping-list"></div></section>
+        <section class="module layers-module"><div class="module-heading"><span>PATCH LAYERS</span><span id="layer-total" class="quiet-count">0</span></div><div id="sidebar-layers" class="layer-list"></div><button class="add-row" data-action="add-layer">+ Add layer</button></section>
+        <section class="module scenes-module"><div class="module-heading"><span>SCENES</span><button id="add-scene" class="mini-icon" aria-label="Add scene" title="Snapshot current scene">+</button></div><div id="scene-list" class="scene-list"></div><div class="scene-nav"><button id="prev-scene" aria-label="Previous scene">‹</button><span id="scene-position">No scenes</span><button id="next-scene" aria-label="Next scene">›</button></div></section>
+        <section class="module quick-controls"><div class="module-heading"><span>MASTER</span></div><label class="control-label" for="master-volume">Master volume <output id="master-output">80%</output></label><input id="master-volume" type="range" min="0" max="100" value="80"></section>
+        <section class="module tempo-module"><div class="module-heading"><span>TEMPO</span></div><div class="tempo-display"><strong id="tempo-value">120</strong><span>BPM</span></div><div class="tempo-actions"><button id="tempo-down" aria-label="Decrease tempo">−</button><button id="tap-tempo">TAP</button><button id="tempo-up" aria-label="Increase tempo">+</button></div></section>
+      </aside>
+      <div id="drawer-shade" class="drawer-shade"></div>
+      <section class="work-area">
+        <div class="performance-header"><div class="performance-title"><button id="mobile-menu" class="icon-button mobile-only" aria-label="Open stage controls"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><div><p id="performance-setname" class="eyebrow">SETLIST</p><h1 id="performance-songname">Choose a song</h1></div></div><div class="header-tools"><button id="save-performance" class="save-button" disabled>Saved</button><button id="close-performance" class="icon-button" aria-label="Close performance" title="Close set">×</button></div></div>
+        <div class="performance-grid">
+          <section class="set-panel panel"><div class="panel-head"><div><p class="eyebrow">IN THIS SET</p><button id="editable-setname" class="inline-title" title="Rename setlist">Setlist</button></div><label class="search-box"><span aria-hidden="true">⌕</span><input id="song-search" type="search" placeholder="Find a song" aria-label="Search songs"></label></div><div id="song-list" class="song-list"></div><div class="set-panel-foot"><button id="add-song" class="add-song">+ Add patch</button><span id="song-count" class="quiet-count">0 songs</span></div></section>
+          <section class="detail-panel panel"><div class="detail-topline"><div><p class="eyebrow">PATCH / SONG</p><div class="song-context"><span id="detail-setname">Setlist</span><span> / </span><strong id="detail-songname">Choose a song</strong></div></div><button id="song-more" class="mini-icon" aria-label="Song actions" title="Song actions">•••</button></div>
+            <div class="song-toolbar"><div class="toolbar-control key-control"><button id="key-button" class="value-button"><span class="control-caption">PLAY IN</span><strong id="key-value">C</strong><span class="chevron">⌄</span></button><button id="hear-key" class="hear-button" title="Play a reference pitch">Hear in key <span>♪</span></button><div id="key-options" class="inline-options key-options" hidden></div></div><div class="toolbar-control"><button id="bpm-button" class="value-button"><span class="control-caption">TEMPO</span><strong><span id="song-bpm">120</span><small> BPM</small></strong><span class="chevron">⌄</span></button><div id="bpm-options" class="inline-options bpm-options" hidden><button data-bpm="-1">−</button><input id="bpm-entry" type="number" min="20" max="300" aria-label="Song tempo"><button data-bpm="1">+</button></div></div><div class="toolbar-control"><button id="volume-button" class="value-button"><span class="control-caption">PATCH LEVEL</span><strong id="song-volume">80%</strong><span class="chevron">⌄</span></button><div id="volume-options" class="inline-options volume-options" hidden><input id="song-volume-slider" type="range" min="0" max="100" aria-label="Patch volume"></div></div></div>
+            <div class="detail-layers-head"><div><p class="eyebrow">SOUND STACK</p><h2>Patch layers <span id="detail-layer-count">0</span></h2></div><button id="detail-add-layer" class="outline-button">+ Add layer</button></div><div id="detail-layers" class="detail-layers"></div>
+            <div class="song-note-row"><button id="pad-layer-toggle" class="pad-layer-toggle" aria-pressed="false"><span class="pad-icon">◌</span><span><strong>Pad layer</strong><small>Part of this patch stack</small></span><span class="toggle-switch"></span></button><label class="song-note">PATCH NOTE<input id="song-note" type="text" placeholder="Optional performance note"></label></div>
+            <div class="detail-foot"><button id="default-cut" class="cut-button"><span>■</span> Default cut</button><span class="cut-hint">Mutes every active layer</span><span class="spacer"></span><button id="detail-add-scene" class="outline-button">Snapshot scene</button><button id="detail-save" class="primary-button" disabled>Save changes</button></div>
+          </section>
+        </div>
+        <section id="ambient-bar" class="ambient-bar"><button id="ambient-expand" class="ambient-title"><span class="ambient-wave">≈</span><span><strong>AMBIENT PAD</strong><small id="ambient-status">OFF · standalone drone</small></span><span class="ambient-chevron">⌃</span></button><div class="ambient-controls"><div class="ambient-key"><span>ROOT</span><select id="ambient-key" aria-label="Ambient pad key"></select></div><label><span>ATTACK</span><input id="attack-control" type="range" min="0" max="8" step="0.1" value="2"></label><label><span>RELEASE</span><input id="release-control" type="range" min="0.2" max="8" step="0.1" value="3"></label><label class="tone-control"><span>TONE</span><input id="tone-control" type="range" min="180" max="1800" value="650"></label><button id="save-ambient-key" class="mini-save">Save key</button><button id="ambient-power" class="power-button" aria-label="Turn ambient pad on" aria-pressed="false"><span>⏻</span></button></div></section>
+      </section>
+    </main>
+  </div>
+  <div id="toast-region" class="toast-region" role="status" aria-live="polite"></div>
+  <dialog id="dialog" class="app-dialog"><form id="dialog-form" method="dialog"><div class="dialog-head"><div><p id="dialog-kicker" class="eyebrow">BLUE NOTE</p><h2 id="dialog-title">New setlist</h2></div><button class="dialog-close" value="cancel" aria-label="Close dialog">×</button></div><div id="dialog-content" class="dialog-content"></div><div class="dialog-actions"><button id="dialog-cancel" class="outline-button" value="cancel">Cancel</button><button id="dialog-submit" class="primary-button" value="confirm">Create</button></div></form></dialog>
+  <script src="app.js" defer></script>
+</body>
+</html>

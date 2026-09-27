@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Blue Note: Run app",
+      "type": "npm",
+      "script": "start",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Playwright: Run tests",
+      "type": "npm",
+      "script": "test",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Playwright: UI mode",
+      "type": "npm",
+      "script": "test:ui",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Playwright: Show report",
+      "type": "npm",
+      "script": "test:report",
+      "problemMatcher": []
+    }
+  ]
+}

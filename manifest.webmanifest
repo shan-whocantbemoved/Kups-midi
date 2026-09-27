@@ -1,0 +1,14 @@
+{
+  "name": "Blue Note MIDI Setlist Performance",
+  "short_name": "Blue Note",
+  "description": "A focused setlist and sound-layer controller for live MIDI performance.",
+  "start_url": ".",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#05090c",
+  "theme_color": "#8bdcff",
+  "icons": [
+    { "src": "icon.svg", "sizes": "192x192 512x512", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

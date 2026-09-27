@@ -1,0 +1,21 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "A local-first stage setlist PWA with a small Python standard-library server. The browser app handles Web MIDI, IndexedDB, service-worker caching, and the ambient audio engine; those APIs cannot run in Python, so the Python file is the local host.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node tests/server.cjs",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed --workers=1 --project=chromium",
+    "test:ui": "playwright test --ui --ui-host 127.0.0.1 --ui-port 9323",
+    "test:report": "playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.3"
+  }
+}
